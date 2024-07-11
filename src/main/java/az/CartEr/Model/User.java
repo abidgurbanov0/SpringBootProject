@@ -1,8 +1,6 @@
 package az.CartEr.Model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
-
 import java.util.List;
 
 @Entity
@@ -16,7 +14,11 @@ public class User {
     private String email;
     private String password;
     private String PPUrl;
-    // store hashed password
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductModel> product;
+
+    // Constructors
     public User(String name, String surname, String email, String password, String PPUrl) {
         this.name = name;
         this.surname = surname;
@@ -26,8 +28,9 @@ public class User {
     }
 
     public User() {
-
     }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -67,11 +70,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public  String getPPUrl() {
+
+    public String getPPUrl() {
         return PPUrl;
     }
+
     public void setPPUrl(String PPUrl) {
         this.PPUrl = PPUrl;
     }
 
+    public List<ProductModel> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<ProductModel> product) {
+        this.product = product;
+    }
 }

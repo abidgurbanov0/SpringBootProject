@@ -21,7 +21,7 @@ public class UploadImageService {
     private String uploadFile(InputStream inputStream, String fileName) throws IOException {
         BlobId blobId = BlobId.of("todoimages-d87af.appspot.com", fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
-        Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("google-services (1).json"));
+        Credentials credentials = GoogleCredentials.fromStream(new FileInputStream("google-services.json"));
         Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
         storage.create(blobInfo, inputStream);
         return String.format((DOWNLOAD_URL + fileName + "?alt=media"), URLEncoder.encode(fileName, StandardCharsets.UTF_8));

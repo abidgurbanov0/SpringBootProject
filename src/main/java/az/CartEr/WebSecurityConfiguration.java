@@ -57,7 +57,7 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login/**",
                                 "/registration/**",
-                                "/verify/**").permitAll()
+                                "/verify/**","/products/**").permitAll()
                         .requestMatchers("/editUser/**").authenticated()
                         .anyRequest().authenticated()
                 )
